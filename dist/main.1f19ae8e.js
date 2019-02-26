@@ -14165,6 +14165,13 @@ require("@firebase/auth");
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
+  var email = document.querySelector('#email');
+  var password = document.querySelector('#password');
+  var signUp = document.querySelector('#signUp');
+  var signIn = document.querySelector('#signIn');
+  var signOut = document.querySelector('#signOut');
+  var log = document.querySelector('#log');
+
   var firebase = require('firebase/app');
 
   require('firebase/auth');
@@ -14173,7 +14180,39 @@ document.addEventListener('DOMContentLoaded', function () {
     apiKey: "AIzaSyCbwkLe6ZFPLMxAoT7iNjSKEFf6hsCuXZA",
     authDomain: "test-store-b68ee.firebaseapp.com"
   };
-  firebase.initializeApp(config);
+  firebase.initializeApp(config); // アカウント登録
+
+  signUp.addEventListener('click', function () {
+    firebase.auth().createUserWithEmailAndPassword(email.value, password.value).then(function (result) {
+      console.log("singUp: ", result);
+      log.innerText = 'SignUp Success!';
+    }).catch(function (error) {
+      console.log(" SignUp error");
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      log.textContent = "SignUp Faild ".concat(errorCode, ": ").concat(errorMessage);
+    });
+  }); // Login
+
+  signIn.addEventListener('click', function () {
+    firebase.auth().signInWithEmailAndPassword(email.value, password.value).then(function (result) {
+      log.textContent = 'サインイン成功';
+    }).catch(function (error) {
+      console.log(" SignIn error");
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      log.textContent = "SignIn Faild ".concat(errorCode, ": ").concat(errorMessage);
+    });
+  }); // LogOut
+
+  signOut.addEventListener('click', function () {
+    firebase.auth().signOut().then(function () {
+      log.textContent = 'サインアウト成功';
+    }).catch(function (error) {
+      console.error(error);
+      log.textContent = 'サインアウト失敗';
+    });
+  });
 });
 },{"firebase/app":"../node_modules/firebase/app/dist/index.cjs.js","firebase/auth":"../node_modules/firebase/auth/dist/index.esm.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -14202,7 +14241,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44135" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43997" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

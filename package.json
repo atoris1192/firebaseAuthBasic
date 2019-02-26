@@ -2,7 +2,7 @@
   "name": "05",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "mit",
   "dependencies": {
     "firebase": "^5.8.4",
     "parcel-bundler": "^1.11.0"
@@ -11,7 +11,7 @@
     "dev": "parcel src/index.pug",
     "build": "parcel build src/index.pug"
   },
-  "devDependencies": {
+  "devdependencies": {
     "pug": "^2.0.3"
   }
 }
